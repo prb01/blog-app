@@ -1,15 +1,16 @@
-const { Blog } = require("../models")
+const { Blog, User } = require("../models")
 const blogsRouter = require("express").Router()
-const { blogFinder } = require("../util/middleware")
+const { blogFinder, tokenExtractor } = require("../util/middleware")
 
 blogsRouter.get("/", async (req, res) => {
   const blogs = await Blog.findAll()
   res.json(blogs)
 })
 
-blogsRouter.post("/", async (req, res) => {
-  const newBlog = await Blog.create(req.body)
-  return res.json(newBlog)
+blogsRouter.post("/", tokenExtractor, async (req, res) => {
+  const user = await User.findByPk(req.decodedToken.id)
+  const blog = await Blog.create({ ...req.body, userId: user.id })
+  res.json(blog)
 })
 
 blogsRouter.get("/:id", blogFinder, async (req, res) => {

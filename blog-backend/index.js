@@ -3,13 +3,14 @@ require("express-async-errors")
 const app = express()
 const { connectToDatabase } = require("./util/db")
 const { PORT } = require("./util/config")
-const { blogsRouter, usersRouter } = require("./controllers")
+const { blogsRouter, usersRouter, loginRouter } = require("./controllers")
 const middleware = require("./util/middleware")
 
 app.use(express.json())
 
 app.use("/api/blogs", blogsRouter)
 app.use("/api/users", usersRouter)
+app.use("/api/login", loginRouter)
 
 app.use(middleware.errorHandler)
 
