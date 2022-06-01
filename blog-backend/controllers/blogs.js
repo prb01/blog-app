@@ -8,12 +8,8 @@ blogsRouter.get("/", async (req, res) => {
 })
 
 blogsRouter.post("/", async (req, res) => {
-  try {
-    const newBlog = await Blog.create(req.body)
-    return res.json(newBlog)
-  } catch (error) {
-    return res.status(400).json({ error })
-  }
+  const newBlog = await Blog.create(req.body)
+  return res.json(newBlog)
 })
 
 blogsRouter.get("/:id", blogFinder, async (req, res) => {
@@ -26,7 +22,7 @@ blogsRouter.get("/:id", blogFinder, async (req, res) => {
 
 blogsRouter.put("/:id", blogFinder, async (req, res) => {
   const { likes } = req.body
-  
+
   if (req.blog) {
     req.blog.likes = likes
     await req.blog.save()

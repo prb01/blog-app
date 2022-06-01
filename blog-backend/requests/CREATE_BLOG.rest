@@ -13,3 +13,20 @@ Content-Type: application/json
 {
   "author": "Test Author"
 }
+######### BAD QUERY (1 missing value)
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "author": "Test Author",
+  "url": "www.google.com"
+}
+######## BAD QUERY (wrong data type)
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "author": "Test Author",
+  "url": 00000,
+  "title": "Blog Test Title"
+}

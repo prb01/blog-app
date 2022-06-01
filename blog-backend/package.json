@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/prb01/blog-app/issues"
   },
-  "homepage": "https://github.com/prb01/blog-app#readme"
+  "homepage": "https://github.com/prb01/blog-app#readme",
+  "dependencies": {
+    "express-async-errors": "^3.1.1"
+  }
 }
