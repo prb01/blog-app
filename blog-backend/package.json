@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/prb01/blog-app#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express-async-errors": "^3.1.1"
   }
 }
