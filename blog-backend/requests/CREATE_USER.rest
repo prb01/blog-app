@@ -6,3 +6,21 @@ Content-Type: application/json
   "password": "password",
   "name": "Erik Sandstrom"
 }
+##### Another User
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "username": "theRagnar",
+  "password": "password",
+  "name": "Ragnar Lothbruk"
+}
+##### User with email
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "username": "foo@bar.com",
+  "password": "password",
+  "name": "Foo Bar"
+}
