@@ -33,7 +33,16 @@ blogsRouter.put("/:id", blogFinder, async (req, res) => {
   }
 })
 
-blogsRouter.delete("/:id", blogFinder, async (req, res) => {
+blogsRouter.delete("/:id", blogFinder, tokenExtractor, async (req, res) => {
+  const user = await User.findByPk(req.decodedToken.id)
+
+  if(!(user && user.id === req.blog.userId )) {
+    return res
+      .status(401)
+      .json({ error: "Must be owner to delete" })
+      .end()
+  }
+
   if (req.blog) {
     await req.blog.destroy()
   }
