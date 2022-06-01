@@ -24,6 +24,18 @@ blogsRouter.get("/:id", blogFinder, async (req, res) => {
   }
 })
 
+blogsRouter.put("/:id", blogFinder, async (req, res) => {
+  const { likes } = req.body
+  
+  if (req.blog) {
+    req.blog.likes = likes
+    await req.blog.save()
+    res.json({ likes })
+  } else {
+    res.status(404).end()
+  }
+})
+
 blogsRouter.delete("/:id", blogFinder, async (req, res) => {
   if (req.blog) {
     await req.blog.destroy()
