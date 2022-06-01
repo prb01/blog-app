@@ -1,14 +1,18 @@
-require("dotenv").config()
-const { Sequelize } = require("sequelize")
 const express = require("express")
 const app = express()
-const blogsRouter = require("./controllers/blogs")
-const PORT = process.env.PORT || 3001
+const { connectToDatabase } = require("./util/db")
+const { PORT } = require("./util/config")
+const { blogsRouter } = require("./controllers")
 
 app.use(express.json())
 
 app.use("/api/blogs", blogsRouter)
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+const start = async () => {
+  await connectToDatabase()
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+  })
+}
+
+start()

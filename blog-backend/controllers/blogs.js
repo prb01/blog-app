@@ -1,9 +1,9 @@
-const Blog = require("../models/blog")
+const { Blog } = require("../models")
 const blogsRouter = require("express").Router()
+const { blogFinder } = require("../util/middleware")
 
 blogsRouter.get("/", async (req, res) => {
   const blogs = await Blog.findAll()
-  console.log(JSON.stringify(blogs, null, 2))
   res.json(blogs)
 })
 
@@ -11,20 +11,24 @@ blogsRouter.post("/", async (req, res) => {
   try {
     const newBlog = await Blog.create(req.body)
     return res.json(newBlog)
-  } 
-  catch (error) {
+  } catch (error) {
     return res.status(400).json({ error })
   }
 })
 
-blogsRouter.delete("/:id", async (req, res) => {
-  await Blog.destroy({
-    where: {
-      id: req.params.id,
-    },
-  })
+blogsRouter.get("/:id", blogFinder, async (req, res) => {
+  if (req.blog) {
+    res.json(req.blog)
+  } else {
+    res.status(404).end()
+  }
+})
 
-  return res.status(204)
+blogsRouter.delete("/:id", blogFinder, async (req, res) => {
+  if (req.blog) {
+    await req.blog.destroy()
+  }
+  res.status(204).end()
 })
 
 module.exports = blogsRouter
