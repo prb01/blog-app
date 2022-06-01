@@ -3,7 +3,13 @@ const blogsRouter = require("express").Router()
 const { blogFinder, tokenExtractor } = require("../util/middleware")
 
 blogsRouter.get("/", async (req, res) => {
-  const blogs = await Blog.findAll()
+  const blogs = await Blog.findAll({
+    attributes: { exclude: ["userId"] },
+    include: {
+      model: User,
+      attributes: ["name"],
+    },
+  })
   res.json(blogs)
 })
 
@@ -33,20 +39,25 @@ blogsRouter.put("/:id", blogFinder, async (req, res) => {
   }
 })
 
-blogsRouter.delete("/:id", blogFinder, tokenExtractor, async (req, res) => {
-  const user = await User.findByPk(req.decodedToken.id)
+blogsRouter.delete(
+  "/:id",
+  blogFinder,
+  tokenExtractor,
+  async (req, res) => {
+    const user = await User.findByPk(req.decodedToken.id)
 
-  if(!(user && user.id === req.blog.userId )) {
-    return res
-      .status(401)
-      .json({ error: "Must be owner to delete" })
-      .end()
-  }
+    if (!(user && user.id === req.blog.userId)) {
+      return res
+        .status(401)
+        .json({ error: "Must be owner to delete" })
+        .end()
+    }
 
-  if (req.blog) {
-    await req.blog.destroy()
+    if (req.blog) {
+      await req.blog.destroy()
+    }
+    res.status(204).end()
   }
-  res.status(204).end()
-})
+)
 
 module.exports = blogsRouter
