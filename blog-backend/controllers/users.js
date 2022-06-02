@@ -27,19 +27,11 @@ usersRouter.get("/:id", async (req, res) => {
   })
 
   if (!user) {
-    res.status(404).end()
+    return res.status(404).end()
   }
 
   res.json(user)
 })
-
-// {
-//       model: Note,
-//       as: "marked_notes",
-//       attributes: { exclude: ["userId"] },
-//       through: { attributes: [] },
-//       include: { model: User, attributes: ["name"] },
-//     },
 
 usersRouter.post("/", async (req, res) => {
   const { username, password, name } = req.body
