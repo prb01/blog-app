@@ -14,7 +14,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hb
 {
   "author": "Auth Auth",
   "url": "http://wwww.eriksand.com",
-  "title": "ErikSand Blog by Auth Auth"
+  "title": "ErikSand Blog by Auth Auth",
+  "year": 2030
 }
 ######### WITH Auth (the@ragnar.com)
 POST http://localhost:3003/api/blogs
