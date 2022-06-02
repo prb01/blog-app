@@ -22,9 +22,7 @@ blogsRouter.get("/", async (req, res) => {
       ],
     }
   }
-
-  console.log(where)
-
+  
   const blogs = await Blog.findAll({
     attributes: { exclude: ["userId"] },
     include: {
