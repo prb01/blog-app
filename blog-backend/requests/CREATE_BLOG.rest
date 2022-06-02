@@ -6,15 +6,25 @@ Content-Type: application/json
   "url": "http://wwww.test.com",
   "title": "Blog Test Title"
 }
-######### WITH Auth
+######### WITH Auth (erik@sand.com)
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJlcmlrU2FuZCIsIm5hbWUiOiJFcmlrIFNhbmRzdHJvbSIsImlhdCI6MTY1NDExNjM0N30.rU0tbfwFiBQaWwaFVVa9szirsOAUW_EQnNxQkyUdAVM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJlcmlrQHNhbmQuY29tIiwibmFtZSI6IkVyaWsgU2FuZHN0cm9tIiwiaWF0IjoxNjU0MTg4NzA1fQ.0CgQ7L4QHjCsgjWUSh1Ml781vPiicx-wK3Mf1Ih93ng
 
 {
   "author": "Auth Auth",
-  "url": "http://wwww.auth.com",
-  "title": "Different Blog by Auth Auth"
+  "url": "http://wwww.eriksand.com",
+  "title": "ErikSand Blog by Auth Auth"
+}
+######### WITH Auth (the@ragnar.com)
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJ0aGVAcmFnbmFyLmNvbSIsIm5hbWUiOiJSYWduYXIgTG90aGJydWsiLCJpYXQiOjE2NTQxODg3NTl9.GxwKRYeNnh5uX6IbeZqjXwS1AicsF-E11mHqbXLHL7g
+
+{
+  "author": "Auth Auth",
+  "url": "http://wwww.ragnar.com",
+  "title": "Ragnar Blog by Auth Auth"
 }
 ######### BAD QUERY
 POST http://localhost:3003/api/blogs

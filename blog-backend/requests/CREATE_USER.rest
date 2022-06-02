@@ -2,7 +2,7 @@ POST http://localhost:3003/api/users
 Content-Type: application/json
 
 {
-  "username": "erikSand",
+  "username": "erik@sand.com",
   "password": "password",
   "name": "Erik Sandstrom"
 }
@@ -11,7 +11,7 @@ POST http://localhost:3003/api/users
 Content-Type: application/json
 
 {
-  "username": "theRagnar",
+  "username": "the@ragnar.com",
   "password": "password",
   "name": "Ragnar Lothbruk"
 }
