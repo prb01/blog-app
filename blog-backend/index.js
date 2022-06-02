@@ -6,7 +6,7 @@ const { PORT } = require("./util/config")
 const {
   blogsRouter,
   usersRouter,
-  loginRouter,
+  sessionsRouter,
   authorsRouter,
   readingListsRouter,
 } = require("./controllers")
@@ -16,9 +16,9 @@ app.use(express.json())
 
 app.use("/api/blogs", blogsRouter)
 app.use("/api/users", usersRouter)
-app.use("/api/login", loginRouter)
 app.use("/api/authors", authorsRouter)
 app.use("/api/readinglists", readingListsRouter)
+app.use("/api/session", sessionsRouter)
 
 app.use(middleware.errorHandler)
 
