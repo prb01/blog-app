@@ -1,4 +1,4 @@
-const { User, Blog } = require("../models")
+const { User, Blog, ReadingList } = require("../models")
 const usersRouter = require("express").Router()
 const { userFinder } = require("../util/middleware")
 const bcrypt = require("bcrypt")
@@ -8,12 +8,38 @@ usersRouter.get("/", async (req, res) => {
   const users = await User.findAll({
     include: {
       model: Blog,
-      attributes: {exclude: ["userId"]},
+      attributes: { exclude: ["userId"] },
     },
   })
-  
+
   res.json(users)
 })
+
+usersRouter.get("/:id", async (req, res) => {
+  const user = await User.findByPk(req.params.id, {
+    attributes: ["name", "username"],
+    include: {
+      model: Blog,
+      as: "readings",
+      attributes: { exclude: ["createdAt", "updatedAt"]},
+      through: { attributes: []}
+    },
+  })
+
+  if (!user) {
+    res.status(404).end()
+  }
+
+  res.json(user)
+})
+
+// {
+//       model: Note,
+//       as: "marked_notes",
+//       attributes: { exclude: ["userId"] },
+//       through: { attributes: [] },
+//       include: { model: User, attributes: ["name"] },
+//     },
 
 usersRouter.post("/", async (req, res) => {
   const { username, password, name } = req.body
