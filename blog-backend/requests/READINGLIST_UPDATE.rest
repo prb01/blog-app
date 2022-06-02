@@ -14,3 +14,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hb
 {
   "read": false
 }
+###### CHANGE READING LIST (as Ragnar)
+PUT http://localhost:3003/api/readinglists/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJ0aGVAcmFnbmFyLmNvbSIsIm5hbWUiOiJSYWduYXIgTG90aGJydWsiLCJpYXQiOjE2NTQxODg3NTl9.GxwKRYeNnh5uX6IbeZqjXwS1AicsF-E11mHqbXLHL7g
+
+{
+  "read": true
+}
